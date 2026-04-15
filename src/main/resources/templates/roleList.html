@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Роли</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        h2 { color: #333; }
+        form { margin-bottom: 15px; }
+        input[type="text"] { padding: 5px; margin: 3px; }
+        input[type="submit"] { padding: 5px 10px; background-color: #9C27B0; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #7B1FA2; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #9C27B0; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .delete-btn { background-color: #f44336; }
+        .delete-btn:hover { background-color: #da190b; }
+        a { color: #9C27B0; }
+    </style>
+</head>
+<body>
+<h1>Управление ролями</h1>
+
+<a href="/students">Студенты</a> |
+<a href="/categories">Категории</a> |
+<a href="/menu-items">Блюда</a>
+
+<h2>Поиск</h2>
+<form method="get" action="/roles">
+    <input type="text" name="search" placeholder="Поиск по id или названию" th:value="${search}">
+    <input type="submit" value="Найти">
+</form>
+
+<h2>Добавить роль</h2>
+<form method="post" action="/roles/add">
+    <input type="text" placeholder="Название роли" name="name" required>
+    <input type="submit" value="Добавить">
+</form>
+
+<h2>Все роли:</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    <tr th:each="role : ${roles}">
+        <td th:text="${role.idRole}"></td>
+        <td th:text="${role.name}"></td>
+        <td>
+            <form method="post" action="/roles/update">
+                <input type="hidden" name="idRole" th:value="${role.idRole}">
+                <input type="text" name="name" th:value="${role.name}" required>
+                <input type="submit" value="Сохранить">
+            </form>
+        </td>
+        <td>
+            <form method="post" action="/roles/delete">
+                <input type="hidden" name="idRole" th:value="${role.idRole}">
+                <input type="submit" value="Удалить" class="delete-btn">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        h2 { color: #333; }
+        form { margin-bottom: 15px; }
+        input[type="text"] { padding: 5px; margin: 3px; }
+        input[type="submit"] { padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .delete-btn { background-color: #f44336; }
+        .delete-btn:hover { background-color: #da190b; }
+        a { color: #4CAF50; }
+    </style>
+</head>
+<body>
+<h1>Управление категориями</h1>
+
+<a href="/students">Студенты</a> |
+<a href="/roles">Роли</a> |
+<a href="/menu-items">Блюда</a>
+
+<h2>Поиск</h2>
+<form method="get" action="/categories">
+    <input type="text" name="search" placeholder="Поиск по id или названию" th:value="${search}">
+    <input type="submit" value="Найти">
+</form>
+
+<h2>Добавить категорию</h2>
+<form method="post" action="/categories/add">
+    <input type="text" placeholder="Название" name="name" required>
+    <input type="text" placeholder="Описание" name="description">
+    <input type="submit" value="Добавить">
+</form>
+
+<h2>Все категории:</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    <tr th:each="cat : ${categories}">
+        <td th:text="${cat.idCategory}"></td>
+        <td th:text="${cat.name}"></td>
+        <td th:text="${cat.description}"></td>
+        <td>
+            <form method="post" action="/categories/update">
+                <input type="hidden" name="idCategory" th:value="${cat.idCategory}">
+                <input type="text" name="name" th:value="${cat.name}" required>
+                <input type="text" name="description" th:value="${cat.description}">
+                <input type="submit" value="Сохранить">
+            </form>
+        </td>
+        <td>
+            <form method="post" action="/categories/delete">
+                <input type="hidden" name="idCategory" th:value="${cat.idCategory}">
+                <input type="submit" value="Удалить" class="delete-btn">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
