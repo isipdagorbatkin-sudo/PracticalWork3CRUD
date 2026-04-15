@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список блюд</title>
+</head>
+<body>
+<h2>Добавить блюдо</h2>
+<form method="post" action="/menu-items/add">
+    <input type="text" placeholder="Название" name="name" required>
+    <input type="text" placeholder="Описание" name="description" required>
+    <input type="number" step="0.01" placeholder="Цена" name="price" required>
+    <input type="number" placeholder="ID Категории" name="categoryId" required>
+
+    <input type="hidden" name="imageUrl" value="нет фото">
+    <input type="hidden" name="isAvailable" value="true">
+
+    <input type="submit" value="Добавить">
+</form>
+
+<h2>Все блюда: </h2>
+<ul>
+    <th:block th:each="item: ${menuItems}">
+        <li>
+            <span th:text="${item.name} + ' - ' + ${item.description} + ' (' + ${item.price} + ' руб.)'"></span>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>

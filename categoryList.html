@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории</title>
+</head>
+<body>
+<h2>Добавить категорию</h2>
+<form method="post" action="/categories/add">
+    <input type="text" placeholder="Название" name="name">
+    <input type="text" placeholder="Описание" name="description">
+    <input type="submit" value="Добавить">
+</form>
+
+<h2>Все категории: </h2>
+<ul>
+    <th:block th:each="cat: ${categories}">
+        <li>
+            <span th:text="${cat.idCategory} + ' - ' + ${cat.name} + ' (' + ${cat.description} + ')'"></span>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>

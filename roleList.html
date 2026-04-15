@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Роли</title>
+</head>
+<body>
+<h2>Добавить роль</h2>
+<form method="post" action="/roles/add">
+    <input type="text" placeholder="Название роли" name="name">
+    <input type="submit" value="Добавить">
+</form>
+
+<h2>Все роли: </h2>
+<ul>
+    <th:block th:each="role: ${roles}">
+        <li>
+            <span th:text="${role.idRole} + ' - ' + ${role.name}"></span>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>

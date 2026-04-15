@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список студентов</title>
+</head>
+<body>
+<h2>Добавить студента</h2>
+<form method="post" action="/students/add">
+    <input type="text" placeholder="Имя" name="name">
+    <input type="text" placeholder="Фамилия" name="surname">
+    <input type="number" placeholder="Возраст" name="age">
+    <input type="submit" value="Добавить">
+</form>
+
+<h2>Все студенты: </h2>
+<ul>
+    <th:block th:each="student: ${students}">
+        <li>
+            <span th:text="${student.name} + ' ' + ${student.surname} + ' ' + ${student.age}"></span>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>
